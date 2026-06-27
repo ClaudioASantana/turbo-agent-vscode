@@ -133,9 +133,9 @@ class TurboAgentViewProvider implements vscode.WebviewViewProvider {
     
     html = html.replace(/(href|src)="\/assets\//g, `$1="${webviewUri}/assets/`).replace(/\.js"/g, `.js?v=${Date.now()}"`).replace(/\.css"/g, `.css?v=${Date.now()}"`);
     
-    // Adicionar a CSP exigida pelo VS Code e permitir requisições fetch para o backend do Turbo Agent
+    // Adicionar a CSP exigida pelo VS Code e permitir requisições fetch para o backend do Turbo Agent e também para o proxy nginx (turbo-agent.local)
     html = html.replace('<head>', `<head>
-      <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-webview-resource: https: http:; script-src 'unsafe-inline' vscode-webview-resource:; style-src 'unsafe-inline' vscode-webview-resource:; connect-src http://localhost:3333 ws://localhost:3333 http://127.0.0.1:3333 ws://127.0.0.1:3333;">
+      <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-webview-resource: https: http:; script-src 'unsafe-inline' vscode-webview-resource:; style-src 'unsafe-inline' vscode-webview-resource:; connect-src http://localhost:3333 ws://localhost:3333 http://127.0.0.1:3333 ws://127.0.0.1:3333 http://turbo-agent.local ws://turbo-agent.local http://192.168.1.7:* ws://192.168.1.7:*;">
       <script>
         const vscode = acquireVsCodeApi();
         window.addEventListener('message', event => {

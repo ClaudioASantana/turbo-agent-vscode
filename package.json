@@ -4,13 +4,16 @@
   "description": "Seu assistente pessoal conectado ao Turbo-Agent local",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.70.0"
   },
   "categories": [
     "Machine Learning",
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:turboAgent.chatView",
+    "onCommand:turboAgent.start"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "viewsContainers": {
